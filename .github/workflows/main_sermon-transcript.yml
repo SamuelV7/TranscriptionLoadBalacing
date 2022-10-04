@@ -25,7 +25,6 @@ jobs:
       - name: Create and start virtual environment
         run: |
           pip3 install pipenv
-          pipenv shell
       
       - name: Install dependencies
         run: pipenv install
