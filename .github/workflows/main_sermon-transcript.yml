@@ -36,5 +36,5 @@ jobs:
             tags: |
               holasam007/app:latest
               holasam007/app:1.0.0
-              ghcr.io/SamuelV7/app:latest
-              ghcr.io/SamuelV7/app:1.0.0
+              ghcr.io/samuelv7/app:latest
+              ghcr.io/samuelv7/app:1.0.0
