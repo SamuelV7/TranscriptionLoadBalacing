@@ -24,11 +24,13 @@ jobs:
 
       - name: Create and start virtual environment
         run: |
-          pip3 install pipenv
+          python -m venv venv
+          source venv/bin/activate
       
       - name: Install dependencies
-        run: pipenv install
-        
+        run: |
+        pip install -r requirements.txt
+        pip install "uvicorn[standard]"
       # Optional: Add step to run tests here (PyTest, Django test suites, etc.)
       
       - name: Upload artifact for deployment jobs
