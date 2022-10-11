@@ -1,4 +1,4 @@
-baseURL = 'http://example.org/'
+baseURL = 'https://zealous-coast-0c9cf1203.2.azurestaticapps.net/'
 languageCode = 'en-us'
 title = 'Sermon Transcript'
 theme = 'PaperMod'
