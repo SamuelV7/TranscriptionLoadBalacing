@@ -1,24 +1,23 @@
 from dataclasses import dataclass
-from msvcrt import setmode
 import os
 from typing import Union
-# from fastapi import FastAPI
-# from fastapi.responses import FileResponse
+from fastapi import FastAPI
+from fastapi.responses import FileResponse
 import requests
 import whisper
 
 
-# app = FastAPI()
+app = FastAPI()
 
 
-# @app.get("/")
-# def read_root():
-#     return {"Hello": "World"}
+@app.get("/")
+def read_root():
+    return {"Hello": "World"}
 
 
-# @app.get("/items/{item_id}")
-# def read_item(item_id: int, q: Union[str, None] = None):
-#     return {"item_id": item_id, "q": q}
+@app.get("/items/{item_id}")
+def read_item(item_id: int, q: Union[str, None] = None):
+    return {"item_id": item_id, "q": q}
 
 
 def transcribe(audio_file_path):
@@ -54,7 +53,6 @@ def batch_transcribe(locations_of_sermons):
         save_file("results/"+sermon.name+".md", sermon.transcript)
         print("Save successful")
 
-batch_transcribe("mp3")
 
 def split_into_chunks(long_string: str, per_period: int):
     split_string = long_string.split(".")
@@ -80,4 +78,4 @@ def split_into_chunks(long_string: str, per_period: int):
 # splitted = split_into_chunks(item, 7)
 #
 # print(splitted)
-# save_file("results/mike-medium.txt", text)
+# save_file("results/mike-medium.md", text)
