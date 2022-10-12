@@ -1,5 +1,5 @@
 ---
-title: "＂The Faithful Servant’s Self-Control＂ - Titus 1_7-9"
+title: "The Faithful Servant’s Self-Control - Titus 1_7-9"
 date: 2022-09-11T00:40:03+01:00
 draft: false
 ---

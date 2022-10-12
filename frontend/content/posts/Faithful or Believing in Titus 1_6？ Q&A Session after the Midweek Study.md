@@ -1,5 +1,5 @@
 ---
-title: "＂Faithful” or “Believing” in Titus 1_6？ Q&A Session after the Midweek Study"
+title: "Faithful or “Believing in Titus 1_6？ Q&A Session after the Midweek Study"
 date: 2022-09-11T00:40:03+01:00
 draft: false
 ---

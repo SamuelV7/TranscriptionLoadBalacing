@@ -1,5 +1,5 @@
 ---
-title: "＂The faithful Servant's Holiness＂ - Titus 1_8"
+title: "The faithful Servant's Holiness - Titus 1_8"
 date: 2022-09-11T00:40:03+01:00
 draft: false
 ---

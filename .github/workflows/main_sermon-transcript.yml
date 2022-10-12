@@ -2,7 +2,7 @@ name: Build image and push to docker and ghcr registry
 on:
   push:
     branches:
-      - 'main'
+      - 'deploy'
 jobs:
   docker-build-push:
     runs-on: ubuntu-latest

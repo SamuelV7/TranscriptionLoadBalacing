@@ -1,5 +1,5 @@
 ---
-title: "“The Faithful Servant’s Hospitality” - Titus 1_7-8"
+title: "The Faithful Servant’s Hospitality - Titus 1_7-8"
 date: 2022-09-11T00:40:03+01:00
 draft: false
 ---
