@@ -1,29 +1,29 @@
 from dataclasses import dataclass
 import os
 from typing import Union
-from fastapi import FastAPI
-from fastapi.responses import FileResponse
-import requests
-import whisper
+# from fastapi import FastAPI
+# from fastapi.responses import FileResponse
+# import requests
+# import whisper
 
 
-app = FastAPI()
+# app = FastAPI()
 
 
-@app.get("/")
-def read_root():
-    return {"Hello": "World"}
+# @app.get("/")
+# def read_root():
+#     return {"Hello": "World"}
 
 
-@app.get("/items/{item_id}")
-def read_item(item_id: int, q: Union[str, None] = None):
-    return {"item_id": item_id, "q": q}
+# @app.get("/items/{item_id}")
+# def read_item(item_id: int, q: Union[str, None] = None):
+#     return {"item_id": item_id, "q": q}
 
 
-def transcribe(audio_file_path):
-    model = whisper.load_model("medium")
-    result = model.transcribe(audio_file_path)
-    return result["text"]
+# def transcribe(audio_file_path):
+#     model = whisper.load_model("medium")
+#     result = model.transcribe(audio_file_path)
+#     return result["text"]
 
 
 def open_results(file_path):
@@ -74,6 +74,40 @@ def split_into_chunks(long_string: str, per_period: int):
 
     return string_into_chunks
 
+def divide_into_paragraphs(long_text : str, lines_per_paragraph:int):
+    text_arr = long_text.split(".")
+    stripped_space = [text.strip() for text in text_arr]
+    formatted_text = ""
+
+    for index, sentence in enumerate(stripped_space):
+        if index == 0:
+            formatted_text += sentence + ". "
+            continue
+        if index % lines_per_paragraph == 0 or index + lines_per_paragraph > (len(long_text)):
+            formatted_text += "\n" + "\n"
+        formatted_text += sentence + ". "
+    return formatted_text
+
+def fixing_formats(text: str):
+    md = text.split("---")
+    sermon_text = md[2]
+    fixed_fromat = divide_into_paragraphs(sermon_text, 5)
+    output = "---\n" + md[1] + "---\n" + fixed_fromat
+    return output
+
+def fix_formatting():
+    file_list = os.listdir("frontend\content\posts")
+    files = [file for file in file_list if file != "first.md"]
+    for file in files:
+        fixed = fixing_formats(open_results("frontend/content/posts/"+file))
+        save_file("frontend/content/posts/"+file, fixed) 
+    # to_save = fixing_formats(open_results("frontend\content\posts/"+files[0]))
+    # save_file("test1.md", to_save)
+
+fix_formatting()
+get_text = open_results("results\Church in a World Gone Mad - Titus 1_1-4.md")
+formatted_text = divide_into_paragraphs(get_text, 7)
+save_file("test.md", formatted_text)
 # item = open_results("results/mike.md")
 # splitted = split_into_chunks(item, 7)
 #
