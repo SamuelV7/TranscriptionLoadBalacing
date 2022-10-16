@@ -1,6 +1,6 @@
 ---
-Transformed Priorities for Young Men
-2022-10-16
+title: "Transformed Priorities for Young Men Titus 2:6-8"
+date: 2022-10-16
 draft: false 
 ---
 Well, it's an encouragement to have so many of you back after last week. I'm sure that some of you lovely young women were really looking forward to hearing what I have to say to the young men, maybe to balance things out a little bit. If you weren't here last week, we're in Titus chapter 2, and we're looking at God's design, His intention for the way that His church should work, the way that we as Christians interact with one another and love one another. So last week we looked at God's expectations and His priorities for young women, and we looked at how we have to uphold a countercultural priority if we are going to uphold God's priority. There were some tricky things, some difficult things to think about. Hopefully, for most of us, it was an encouragement to consider how we can honor God. I've certainly been struggling this week because my wife is out of town and feeling the absence of her help and love. 
