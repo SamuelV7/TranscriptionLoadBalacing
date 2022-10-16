@@ -16,7 +16,7 @@ from transformers import AutoModelForSeq2SeqLM, AutoTokenizer
 
 
 def transcribe(audio_file_path):
-    model = whisper.load_model("medium")
+    model = whisper.load_model("large")
     result = model.transcribe(audio_file_path)
     return result["text"]
 
@@ -86,7 +86,7 @@ def fix_formatting():
 def create_content_for_hugo(title: str, draft: str):
     the_date = datetime.now()
     formatted_date = the_date.strftime("%Y-%m-%d")
-    return "---\n" + "title: "+ title + "\n" + "date: "+ formatted_date +"\n"+ "draft: " + draft + " ---\n"
+    return "---\n" + "title: " + title + "\n" + "date: " + formatted_date + "\n" + "draft: " + draft + " ---\n"
 
 def transcribe_low_level(audio_locations: str):
     model = whisper.load_model("medium")
