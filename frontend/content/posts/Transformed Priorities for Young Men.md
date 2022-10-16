@@ -99,7 +99,7 @@ You need to accept responsibility. But it is challenging. It is difficult work a
 
 Why? Because God is with you. God wants you to succeed. Sometimes when we're fighting sin it starts to feel like everyone's against us and maybe everyone else is but your savior is not. He has promised to help you and he has actually given you everything you need for life and godliness. You can persist. You can grow. You can conquer sin. 
 
-You need to be faithful. You need to commit yourself. You need to work hard and you need to trust the lord. Now the last thing Paul says in this list, actually there's two more things, but he tells us to help the weak. Now to help means to invest in, to love. This is where words stop and actions begin. So we admonish the idol. 
+You need to be faithful. You need to commit yourself. You need to work hard and you need to trust the Lord. Now the last thing Paul says in this list, actually there's two more things, but he tells us to help the weak. Now to help means to invest in, to love. This is where words stop and actions begin. So we admonish the idol. 
 
 We speak the truth to them and tell them to change. We encourage the weak. We speak the truth to them and tell them to carry on the faint hearted. But the weak people are people who lack what they need to succeed. People who are hampered. Who are at a disadvantage. Well our culture is producing weak men. 
 
