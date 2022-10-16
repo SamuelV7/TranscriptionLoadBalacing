@@ -16,7 +16,7 @@ from transformers import AutoModelForSeq2SeqLM, AutoTokenizer
 
 
 def transcribe(audio_file_path):
-    model = whisper.load_model("large")
+    model = whisper.load_model("medium")
     result = model.transcribe(audio_file_path)
     return result["text"]
 
