@@ -123,7 +123,7 @@ if __name__ == '__main__':
         translated.append(text)
     divided = divide_into_paragraphs("".join(translated), 7)
     to_save = hugo_with_content("Transformed Priorities for Young Women", 'false', divided)
-    save_file('frontend/content/posts/first-es-h.md', to_save)
+    save_file('frontend/content/posts/second-es.md', to_save)
 # transcribe_save("Transformed Priorities for Young Men.mp3")
 # fix_formatting()
 # get_text = open_results("results\Church in a World Gone Mad - Titus 1_1-4.md")
