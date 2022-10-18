@@ -1,5 +1,5 @@
 ---
-title: Transformed Priorities for Young Women es - Helsinki Opus
+title: "Transformed Priorities for Young Women es - Helsinki Opus"
 date: 2022-10-19
 draft: false 
 ---
