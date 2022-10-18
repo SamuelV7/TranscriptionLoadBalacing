@@ -1,9 +1,8 @@
 ---
 title: "Transformed Priorities for Young Women es - Helsinki Opus"
-date: 2022-10-19
+date: 2022-10-11T00:40:03+01:00
 draft: false 
 ---
-
 A lo largo de la historia y revelado a nosotros hoy. No esperas que te obedezcamos sin decirnos lo que debemos obedecer. Eres amable al revelarnos tus expectativas. Y Señor, te damos gracias por eso porque estamos desesperados por obedecer. Estamos agradecidos por la gracia que nos has dado, y anhelamos someter nuestras vidas a tu voluntad, a tus expectativas, a tus planes para que podamos glorificarte. Y aquí vemos hoy un texto que va en contra de las expectativas de nuestro mundo y de nuestra sociedad, una verdad, una orden que la gente de este mundo que nos rodea nos diría que ignoremos o que nos deshagamos. Pero Señor, debemos obedecer. 
 
 Ayúdanos a obedecer. Ayúdenos a atesorar el acto de obediencia fiel, a ofrecernos a nosotros mismos y a nuestras vidas como sacrificio, a conformarnos en la renovación de nuestra mente por el poder transformador de su gracia para que podamos ser fieles para glorificarlos. Ayúdame mientras hablo para hablar con claridad y humildad. Ayúdenos a todos mientras nos sentamos aquí y escuchamos su palabra para considerar cómo podría cambiar nuestras vidas hoy. Ayúdanos a someternos. Ayúdanos a depender de ti y confiar en tus promesas. Oramos en tu nombre y por el nombre de la gloria de tu Hijo. 
