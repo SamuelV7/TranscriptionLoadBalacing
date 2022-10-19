@@ -82,7 +82,7 @@ def hugo_header(title: str, draft: str):
 
 def hugo_with_content(title: str, draft: str, content: str):
     header = hugo_header(title, draft)
-    return header + "\n" + content
+    return header + content
 def transcribe_low_level(audio_locations: str):
     model = whisper.load_model("medium")
 
@@ -110,20 +110,25 @@ def transcribe_save(audio_location: str):
     hugo_metadata = hugo_header(name, "false")
     save_file("results/"+name+".md", hugo_metadata+paragraphed)
 
-if __name__ == '__main__':
+
+def translate_file(file_to_translate: str, save_to: str, title: str):
     model_checkpoint = "Helsinki-NLP/opus-mt-en-es"
     translator = pipeline("translation", model=model_checkpoint)
     translated = []
-    the_length = len(open_results('test.md').split("."))
+    the_length = len(open_results(file_to_translate).split("."))
     for i, sentence in enumerate(open_results('test.md').split(".")):
         print((i / the_length) * 100)
         print(i, "Of", the_length)
-        output = translator(sentence+". ")
+        output = translator(sentence + ". ")
         text = output[0]['translation_text']
         translated.append(text)
     divided = divide_into_paragraphs("".join(translated), 7)
-    to_save = hugo_with_content("Transformed Priorities for Young Women", 'false', divided)
-    save_file('frontend/content/posts/second-es.md', to_save)
+    to_save = hugo_with_content(title, 'false', divided)
+    save_file(save_to, to_save)
+
+
+if __name__ == '__main__':
+    translate_file()
 # transcribe_save("Transformed Priorities for Young Men.mp3")
 # fix_formatting()
 # get_text = open_results("results\Church in a World Gone Mad - Titus 1_1-4.md")
