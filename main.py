@@ -126,9 +126,9 @@ def translate_file(file_to_translate: str, save_to: str, title: str):
     to_save = hugo_with_content(title, 'false', divided)
     save_file(save_to, to_save)
 
-
-if __name__ == '__main__':
-    translate_file()
+#
+# if __name__ == '__main__':
+#     translate_file()
 # transcribe_save("Transformed Priorities for Young Men.mp3")
 # fix_formatting()
 # get_text = open_results("results\Church in a World Gone Mad - Titus 1_1-4.md")

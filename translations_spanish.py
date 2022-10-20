@@ -1,10 +1,5 @@
-from enum import Enum
 from transformers import pipeline, AutoTokenizer, AutoModelForSeq2SeqLM
 
-class Models(Enum):
-    Nllb200 = "facebook/nllb-200-distilled-600M"
-    Helsinki = "Helsinki-NLP/opus-mt-en-es"
-    M2m100_testing = 4
 
 def translate_helsinki_opus(text: str):
     model_checkpoint = "Helsinki-NLP/opus-mt-en-es"
