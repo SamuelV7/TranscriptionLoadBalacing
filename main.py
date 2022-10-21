@@ -1,20 +1,12 @@
+import multiprocessing
 from dataclasses import dataclass
 import os
-# import requests
 import whisper
 from datetime import datetime
-from transformers import AutoModelForSeq2SeqLM, AutoTokenizer
-
-
-# app = FastAPI()
-# @app.get("/")
-# def read_root():
-#     return {"Hello": "World"}
-# @app.get("/items/{item_id}")
-# def read_item(item_id: int, q: Union[str, None] = None):
-#     return {"item_id": item_id, "q": q}
-
-
+from transformers import pipeline, AutoTokenizer, AutoModelForSeq2SeqLM
+# import translations_spanish
+from translations_spanish import translate_large
+from multiprocessing import Pool
 def transcribe(audio_file_path):
     model = whisper.load_model("large")
     result = model.transcribe(audio_file_path)
@@ -83,11 +75,14 @@ def fix_formatting():
         # to_save = fixing_formats(open_results("frontend\content\posts/"+files[0]))
     # save_file("test1.md", to_save)
 
-def create_content_for_hugo(title: str, draft: str):
+def hugo_header(title: str, draft: str):
     the_date = datetime.now()
     formatted_date = the_date.strftime("%Y-%m-%d")
-    return "---\n" + "title: "+ title + "\n" + "date: "+ formatted_date +"\n"+ "draft: " + draft + " ---\n"
+    return "---\n" + "title: " + title + "\n" + "date: " + formatted_date + "\n" + "draft: " + draft + " ---\n"
 
+def hugo_with_content(title: str, draft: str, content: str):
+    header = hugo_header(title, draft)
+    return header + content
 def transcribe_low_level(audio_locations: str):
     model = whisper.load_model("medium")
 
@@ -112,11 +107,29 @@ def transcribe_save(audio_location: str):
     sermon = transcribe(audio_location)
     name = audio_location.split(".")[0]
     paragraphed = divide_into_paragraphs(sermon, 7)
-    hugo_metadata = create_content_for_hugo(name, "false")
-
+    hugo_metadata = hugo_header(name, "false")
     save_file("results/"+name+".md", hugo_metadata+paragraphed)
 
-transcribe_save("Transformed Priorities for Young Men.mp3")
+
+def translate_file(file_to_translate: str, save_to: str, title: str):
+    model_checkpoint = "Helsinki-NLP/opus-mt-en-es"
+    translator = pipeline("translation", model=model_checkpoint)
+    translated = []
+    the_length = len(open_results(file_to_translate).split("."))
+    for i, sentence in enumerate(open_results('test.md').split(".")):
+        print((i / the_length) * 100)
+        print(i, "Of", the_length)
+        output = translator(sentence + ". ")
+        text = output[0]['translation_text']
+        translated.append(text)
+    divided = divide_into_paragraphs("".join(translated), 7)
+    to_save = hugo_with_content(title, 'false', divided)
+    save_file(save_to, to_save)
+
+#
+# if __name__ == '__main__':
+#     translate_file()
+# transcribe_save("Transformed Priorities for Young Men.mp3")
 # fix_formatting()
 # get_text = open_results("results\Church in a World Gone Mad - Titus 1_1-4.md")
 # formatted_text = divide_into_paragraphs(get_text, 7)
