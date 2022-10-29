@@ -7,6 +7,8 @@ from transformers import pipeline, AutoTokenizer, AutoModelForSeq2SeqLM
 # import translations_spanish
 from translations_spanish import translate_large
 from multiprocessing import Pool
+
+
 def transcribe(audio_file_path):
     model = whisper.load_model("large")
     result = model.transcribe(audio_file_path)
