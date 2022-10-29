@@ -6,7 +6,6 @@ from datetime import datetime
 from transformers import pipeline, AutoTokenizer, AutoModelForSeq2SeqLM
 # import translations_spanish
 from translations_spanish import translate_large
-from multiprocessing import Pool
 
 
 def transcribe(audio_file_path):
@@ -128,17 +127,3 @@ def translate_file(file_to_translate: str, save_to: str, title: str):
     to_save = hugo_with_content(title, 'false', divided)
     save_file(save_to, to_save)
 
-#
-# if __name__ == '__main__':
-#     translate_file()
-# transcribe_save("Transformed Priorities for Young Men.mp3")
-# fix_formatting()
-# get_text = open_results("results\Church in a World Gone Mad - Titus 1_1-4.md")
-# formatted_text = divide_into_paragraphs(get_text, 7)
-# save_file("test.md", formatted_text)
-
-# item = open_results("results/mike.md")
-# splitted = split_into_chunks(item, 7)
-#
-# print(splitted)
-# save_file("results/mike-medium.md", text)
