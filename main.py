@@ -1,3 +1,4 @@
+import imp
 import multiprocessing
 from dataclasses import dataclass
 import os
@@ -6,7 +7,7 @@ from datetime import datetime
 from transformers import pipeline, AutoTokenizer, AutoModelForSeq2SeqLM
 # import translations_spanish
 from translations_spanish import translate_large
-
+from pytube import YouTube
 
 def transcribe(audio_file_path):
     model = whisper.load_model("large")
@@ -127,3 +128,13 @@ def translate_file(file_to_translate: str, save_to: str, title: str):
     to_save = hugo_with_content(title, 'false', divided)
     save_file(save_to, to_save)
 
+def download_yt(url: str):
+    yt = pytube3.Youtube(url)
+    audio_stream = yt.streams.filter(only_audio=True).first()
+    file_name = audio_stream.download(output_path = 'mp3')
+    base, ext = os.path.splitext(file_name)
+    new_file = base + '.mp3'
+    os.rename(file_name, new_file)
+
+
+download_yt("https://www.youtube.com/watch?v=KycaqDb_TV0")

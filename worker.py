@@ -1,3 +1,4 @@
+
 from dotenv import load_dotenv
 import os
 import redis
@@ -13,3 +14,5 @@ def getJob():
     data_string = r.rpop('sermon-scribe-queue')
     data = json.loads(data)
     return data
+
+
