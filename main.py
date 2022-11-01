@@ -1,16 +1,16 @@
-import imp
-import multiprocessing
-from dataclasses import dataclass
 import os
+import time
+import ffmpeg
+import pytube
 import whisper
+from worker import get_job, save
 from datetime import datetime
-from transformers import pipeline, AutoTokenizer, AutoModelForSeq2SeqLM
-# import translations_spanish
-from translations_spanish import translate_large
-from pytube import YouTube
+from transformers import pipeline
+from dataclasses import dataclass
+
 
 def transcribe(audio_file_path):
-    model = whisper.load_model("large")
+    model = whisper.load_model("medium")
     result = model.transcribe(audio_file_path)
     return result["text"]
 
@@ -77,14 +77,18 @@ def fix_formatting():
         # to_save = fixing_formats(open_results("frontend\content\posts/"+files[0]))
     # save_file("test1.md", to_save)
 
+
 def hugo_header(title: str, draft: str):
     the_date = datetime.now()
     formatted_date = the_date.strftime("%Y-%m-%d")
     return "---\n" + "title: " + title + "\n" + "date: " + formatted_date + "\n" + "draft: " + draft + " ---\n"
 
+
 def hugo_with_content(title: str, draft: str, content: str):
     header = hugo_header(title, draft)
     return header + content
+
+
 def transcribe_low_level(audio_locations: str):
     model = whisper.load_model("medium")
 
@@ -105,12 +109,14 @@ def transcribe_low_level(audio_locations: str):
     # print the recognized text
     return result.text
 
+
 def transcribe_save(audio_location: str):
     sermon = transcribe(audio_location)
     name = audio_location.split(".")[0]
     paragraphed = divide_into_paragraphs(sermon, 7)
     hugo_metadata = hugo_header(name, "false")
     save_file("results/"+name+".md", hugo_metadata+paragraphed)
+    return hugo_metadata+paragraphed
 
 
 def translate_file(file_to_translate: str, save_to: str, title: str):
@@ -129,13 +135,30 @@ def translate_file(file_to_translate: str, save_to: str, title: str):
     save_file(save_to, to_save)
 
 def download_yt(url: str):
-    yt = pytube3.Youtube(url)
+    yt = pytube.YouTube(url)
     audio_stream = yt.streams.filter(only_audio=True).first()
-    file_name = audio_stream.download(output_path = 'mp3')
-    base, ext = os.path.splitext(file_name)
-    new_file = base + '.mp3'
-    os.rename(file_name, new_file)
+    output_dir = 'mp3'
+    file_name = audio_stream.download(output_path = output_dir)
+    # Audio conversion
+    relative_path = file_name.split("/")[-1]
+    base, ext = os.path.splitext(relative_path)
+    new_file = output_dir+"/"+base + '.mp3'
+    stream = ffmpeg.input(output_dir+"/"+relative_path)
+    stream = ffmpeg.output(stream, new_file)
+    ffmpeg.run(stream)
+    return new_file
+    # os.rename(file_name, new_file)
 
 
-download_yt("https://www.youtube.com/watch?v=KycaqDb_TV0")
+def download_transcribe_save(job):
+    file = download_yt(job['link'])
+    transcript = transcribe_save(file)
+    save(job['link'], transcript)
 
+
+if __name__ == '__main__':
+    while True:
+        job = get_job()
+        if job is not None:
+            download_transcribe_save(job)
+        time.sleep(10*60)
