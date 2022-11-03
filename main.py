@@ -112,7 +112,8 @@ def transcribe_low_level(audio_locations: str):
 
 def transcribe_save(audio_location: str):
     sermon = transcribe(audio_location)
-    name = audio_location.split(".")[0]
+    # Gets the file name from directory and removes mp3 at the end
+    name = audio_location.split(audio_location.split(".")[-2])[-1]
     paragraphed = divide_into_paragraphs(sermon, 7)
     hugo_metadata = hugo_header(name, "false")
     save_file("results/"+name+".md", hugo_metadata+paragraphed)
@@ -155,10 +156,13 @@ def download_transcribe_save(job):
     transcript = transcribe_save(file)
     save(job['link'], transcript)
 
+time_for_request = 30
 
 if __name__ == '__main__':
     while True:
+        print("Getting Job")
         job = get_job()
         if job is not None:
+            print("Starting Transcription")
             download_transcribe_save(job)
-        time.sleep(10*60)
+        time.sleep(time_for_request)
