@@ -9,7 +9,7 @@ r = redis.StrictRedis.from_url(REDIS_URL)
 
 
 def get_job():
-    if r.exists("sermon-scribe-queue") is None:
+    if r.exists("sermon-scribe-queue") is 0:
         return None
     data_string = r.rpop('sermon-scribe-queue')
     # if data_string ==
