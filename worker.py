@@ -1,5 +1,6 @@
 from dotenv import load_dotenv
 import os
+import os
 import redis
 import json 
 
@@ -9,7 +10,7 @@ r = redis.StrictRedis.from_url(REDIS_URL)
 
 
 def get_job():
-    if r.exists("sermon-scribe-queue") is 0:
+    if r.exists("sermon-scribe-queue") == 0:
         return None
     data_string = r.rpop('sermon-scribe-queue')
     # if data_string ==
@@ -17,6 +18,6 @@ def get_job():
     return data
 
 
-def save(key: str, value: str):
+def save_result_db(key: str, value: str):
     print("Saving to db")
     r.set(key, value)

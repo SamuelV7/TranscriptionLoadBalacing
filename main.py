@@ -3,7 +3,7 @@ import time
 import ffmpeg
 import pytube
 import whisper
-from worker import get_job, save
+from worker import get_job, save_result_db
 from datetime import datetime
 from transformers import pipeline
 from dataclasses import dataclass
@@ -11,7 +11,7 @@ from dataclasses import dataclass
 
 def transcribe(audio_file_path):
     model = whisper.load_model("medium")
-    result = model.transcribe(audio_file_path)
+    result = model.transcribe(audio_file_path, language='en')
     return result["text"]
 
 
@@ -19,7 +19,6 @@ def open_results(file_path):
     with open(file_path, "r", encoding="utf-8") as f:
         text = f.read()
         return text
-
 
 def save_file(file_name, text):
     with open(file_name, 'w', encoding="utf-8") as f:
@@ -81,7 +80,8 @@ def fix_formatting():
 def hugo_header(title: str, draft: str):
     the_date = datetime.now()
     formatted_date = the_date.strftime("%Y-%m-%d")
-    return "---\n" + "title: " + title + "\n" + "date: " + formatted_date + "\n" + "draft: " + draft + " ---\n"
+    return "---\n" + "title: " + title + "\n" + "date: " + formatted_date + "\n" \
+           + "draft: " + draft + "\n" + " --- " + "\n"
 
 
 def hugo_with_content(title: str, draft: str, content: str):
@@ -90,22 +90,26 @@ def hugo_with_content(title: str, draft: str, content: str):
 
 
 def transcribe_low_level(audio_locations: str):
-    model = whisper.load_model("medium")
+    model = whisper.load_model("tiny")
 
     # load audio and pad/trim it to fit 30 seconds
     audio = whisper.load_audio(audio_locations)
     audio = whisper.pad_or_trim(audio)
 
     # make log-Mel spectrogram and move to the same device as the model
-    mel = whisper.log_mel_spectrogram(audio).to(model.device)
+    # mel = whisper.log_mel_spectrogram(audio).to(model.device)
 
+    mel = whisper.log_mel_spectrogram(audio)
     # detect the spoken language
-    _, probs = model.detect_language(mel)
+    tensor, probs = model.detect_language(mel)
     print(f"Detected language: {max(probs, key=probs.get)}")
 
     # decode the audio
-    options = whisper.DecodingOptions()
+    options = whisper.DecodingOptions(language='en', fp16=False)
     result = whisper.decode(model, mel, options)
+
+    # print the recognized text
+    print(result.text)
     # print the recognized text
     return result.text
 
@@ -155,7 +159,7 @@ def download_yt(url: str):
 def download_transcribe_save(job):
     file = download_yt(job['link'])
     transcript = transcribe_save(file)
-    save(job['link'], transcript)
+    save_result_db(job['link'], transcript)
 
 time_for_request = 30
 
