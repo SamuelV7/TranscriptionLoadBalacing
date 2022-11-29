@@ -1,4 +1,4 @@
-import {Box, Button, Center, Heading, HStack, Input, Text, VStack} from '@chakra-ui/react'
+import { Button, OutlinedInput, Stack, TextField, Typography } from '@mui/material'
 import React, { use, useState } from 'react'
 
 export default function Home() {
@@ -17,32 +17,28 @@ export default function Home() {
   }
   return (
     <>
-      <VStack spacing={3}>
-        <Center p='5'>
-          <Box>
-            <Heading>
-              Grace Life London - Scribe Service
-            </Heading>
-          </Box>
-        </Center>
-        <Text fontSize='4xl'>
+      <Stack spacing={3}>
+        <Typography>
+          Grace Life London - Scribe Service
+        </Typography>
+        <Typography fontSize='4xl'>
           Enter Youtube Link from Grace Life London to Transcribe
-        </Text>
-        <HStack>
-          <Input placeholder='Title Of Sermon'
+        </Typography>
+        <Stack direction="row">
+          <TextField placeholder='Title Of Sermon'
             value={sermonTitle} 
             onChange={e => setSermonTitle(e.target.value)}>
-          </Input>
-          <Input placeholder='Enter link here' 
+          </TextField>
+          <TextField placeholder='Enter link here' 
             value={link} 
             onChange={e => setLink(e.target.value)}>
-          </Input>
-        </HStack>
-        <Button onClick={e => handleSubmit(e)}>Transcribe</Button>
-        <Text fontSize='3xl'>
+          </TextField>
+          <Button onClick={e => handleSubmit(e)}>Transcribe</Button>
+        </Stack>
+        <Typography fontSize='3xl'>
           {id}
-        </Text>
-      </VStack>
+        </Typography>
+      </Stack>
     </>    
   )
 }
