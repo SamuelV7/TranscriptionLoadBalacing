@@ -15,6 +15,7 @@ export default function Home() {
     console.log(redis_id.name)
     setID(redis_id.name)
   }
+  
   return (
     <>
       <Stack spacing={3}>
