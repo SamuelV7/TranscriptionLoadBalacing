@@ -8,7 +8,6 @@ load_dotenv()
 REDIS_URL = os.getenv('REDIS_URL')
 r = redis.StrictRedis.from_url(REDIS_URL)
 
-
 def get_job():
     if r.exists("sermon-scribe-queue") == 0:
         return None
