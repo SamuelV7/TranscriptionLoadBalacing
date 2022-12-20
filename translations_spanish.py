@@ -8,7 +8,7 @@ def translate_helsinki_opus(text: str):
     return output[0]['translation_text']
 
 # translate function above is better, this is nllb-200 and results are not great
-def translate_nllb_model(text: str):
+def translate_nllb_model_deprecated(text: str):
     tokenizer = AutoTokenizer.from_pretrained("facebook/nllb-200-distilled-600M")
     model = AutoModelForSeq2SeqLM.from_pretrained("facebook/nllb-200-distilled-600M")
     inputs = tokenizer(text, return_tensors="pt")

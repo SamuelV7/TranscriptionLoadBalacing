@@ -17,7 +17,7 @@ export default async function handler(
   if (dataExists == null){
     redis.lpush('sermon-scribe-queue', JSON.stringify(data))
     redis.set(data.link, "pending")
-    return res.status(200).json({'name': 'Already Submitted'})
+    return res.status(200).json({'name': 'Submitted'})
   }
-  res.status(200).json({'name': data.title})
+  res.status(200).json({'name': 'Already being processed'})
 }
