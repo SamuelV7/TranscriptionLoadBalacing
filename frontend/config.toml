@@ -1,7 +1,0 @@
-baseURL = 'https://wonderful-bay-098c7a203.2.azurestaticapps.net/'
-languageCode = 'en-us'
-title = 'Sermon Transcript'
-theme = 'PaperMod'
-
-[Params]
-ShowBreadCrumbs = true
