@@ -13,8 +13,8 @@ from dataclasses import dataclass
 def transcribe(audio_file_path: str) -> str:
     model = whisper.load_model("medium")
     result = model.transcribe(audio_file_path, language='en')
+    model.transcribe()
     return result["text"]
-
 
 def open_results(file_path):
     with open(file_path, "r", encoding="utf-8") as f:
@@ -151,14 +151,14 @@ def download_transcribe_save(job):
     transcript = transcribe_save(file)
     save_result_db(job['link'], transcript)
 
-time_for_request = 30
+# time_for_request = 30
 
-if __name__ == '__main__':
-    while True:
-        print("Attempting to Get Job")
-        job = get_job()
-        if job is not None:
-            print("Job Received")
-            print("Starting Transcription")
-            download_transcribe_save(job)
-        time.sleep(time_for_request)
+# if __name__ == '__main__':
+#     while True:
+#         print("Attempting to Get Job")
+#         job = get_job()
+#         if job is not None:
+#             print("Job Received")
+#             print("Starting Transcription")
+#             download_transcribe_save(job)
+#         time.sleep(time_for_request)
