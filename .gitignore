@@ -4,6 +4,9 @@ secrets.py
 mp3
 *.mp3
 
+.vscode
+.idea
+
 # Byte-compiled / optimized / DLL files
 __pycache__/
 *.py[cod]

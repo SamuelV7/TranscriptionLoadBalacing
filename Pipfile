@@ -9,9 +9,7 @@ requests = "*"
 streamlit = "*"
 openai-whisper = "*"
 streamlit-option-menu = "*"
+uvicorn = {extras = [ "standard",], version = "*"}
 
 [dev-packages]
-
-[packages.uvicorn]
-extras = [ "standard",]
-version = "*"
+autopep8 = "*"

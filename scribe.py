@@ -1,7 +1,11 @@
 import streamlit as st
 from main import whisper
+from core import RedisDB, Transcribe
 
-st.write("Hello World")
+st.write("Grace Life London Sermon Transcription")
 
-# let user upload file
-uploaded_file = st.file_uploader("Choose a file")
+# Recent Sermons
+st.write("Recent Sermons")
+
+
+
