@@ -29,9 +29,20 @@ class RedisDB:
         self.redis.xadd(stream_name, message)
     
     def add_transcript(self, sermon: Sermon):
-        self.redis.set(sermon.url, sermon.__dict__)
+        self.redis.set(sermon.sermon.url, sermon.__dict__)
         return
     
+    def check_if_group_exists(self, stream_name, group_name):
+        groups = self.redis.xinfo_groups(stream_name)
+        for group in groups:
+            if group_name == group['name']:
+                return True
+        return False
+    
+    def create_if_group_does_not_exist(self, stream_name, group_name):
+        if not self.check_if_group_exists(stream_name, group_name):
+            self.create_group(stream_name, group_name)
+        return
     # get messages from stream acknowledge them
     def get_messages(self, stream_name:str, group_name:str, consumer_name:str):
         # read pending messages
@@ -79,21 +90,29 @@ class Transcribe:
             f.write(text)
         
 class Worker:
-    def __init__(self, redis_url, model):
+    def __init__(self, redis_url, model, stream_name, group_name, consumer_name):
+        self.stream_name = stream_name
+        self.group_name = group_name
+        self.consumer_name = consumer_name
         self.redis = RedisDB(redis_url)
         self.model = Transcribe(model)
-        return
+        self.redis.create_if_group_does_not_exist(stream_name, group_name)
 
     # get message and transcribe and add to database
     def work(self):
         # get one message from stream
-        self.current = self.redis.get_messages()
-        print(self.current)
-    
-    def save_transcript_db(self, file_name, url, text):
-        sermon = SermonYT(file_name, url, text)
-        self.redis.add_transcript(sermon=sermon)
+        message = self.redis.get_messages(self.stream_name, self.group_name, self.consumer_name)
+        yt = YouTube(message['url'])
+        file = yt.download_mp3()
+        transcript = self.model.transcribe(file)
+        # save transcript to database
+        self.save_transcript(message, file, transcript) 
         return
+
+    def save_transcript(self, message, file, transcript):
+        sermon = Sermon(SermonYT(file, message['url']), transcript['text'])
+        self.redis.add_transcript(sermon)
+
 
 
 class YouTube:
