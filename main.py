@@ -4,9 +4,9 @@ from typing import Optional
 import ffmpeg
 import pytube
 import whisper
-from worker import get_job, save_result_db
+# from worker import get_job, save_result_db
 from datetime import datetime
-from transformers import pipeline
+# from transformers import pipeline
 from dataclasses import dataclass
 
 
@@ -15,6 +15,10 @@ def transcribe(audio_file_path: str) -> str:
     result = model.transcribe(audio_file_path, language='en')
     model.transcribe()
     return result["text"]
+
+def transcibe_from_yt(url: str):
+    file = download_yt(url, None)
+    return transcribe(file)
 
 def open_results(file_path):
     with open(file_path, "r", encoding="utf-8") as f:
@@ -146,10 +150,10 @@ def download_yt(url: str, output_file_name: Optional[str]):
     return new_file
 
 
-def download_transcribe_save(job):
-    file = download_yt(job['link'], None)
-    transcript = transcribe_save(file)
-    save_result_db(job['link'], transcript)
+# def download_transcribe_save(job):
+#     file = download_yt(job['link'], None)
+#     transcript = transcribe_save(file)
+#     save_result_db(job['link'], transcript)
 
 # time_for_request = 30
 
@@ -162,3 +166,7 @@ def download_transcribe_save(job):
 #             print("Starting Transcription")
 #             download_transcribe_save(job)
 #         time.sleep(time_for_request)
+
+if __name__ == '__main__':
+    url = input("Enter URL: ")
+    file = download_yt(url, None)
