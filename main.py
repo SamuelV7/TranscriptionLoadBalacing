@@ -11,9 +11,8 @@ from dataclasses import dataclass
 
 
 def transcribe(audio_file_path: str) -> str:
-    model = whisper.load_model("medium")
+    model = whisper.load_model("tiny")
     result = model.transcribe(audio_file_path, language='en')
-    model.transcribe()
     return result["text"]
 
 def transcibe_from_yt(url: str):
@@ -169,4 +168,5 @@ def download_yt(url: str, output_file_name: Optional[str]):
 
 if __name__ == '__main__':
     url = input("Enter URL: ")
-    file = download_yt(url, None)
+    audio_location = download_yt(url, None)
+    transcribe_save(audio_location)
