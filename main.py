@@ -11,7 +11,7 @@ from dataclasses import dataclass
 
 
 def transcribe(audio_file_path: str) -> str:
-    model = whisper.load_model("tiny")
+    model = whisper.load_model("base")
     result = model.transcribe(audio_file_path, language='en')
     return result["text"]
 
