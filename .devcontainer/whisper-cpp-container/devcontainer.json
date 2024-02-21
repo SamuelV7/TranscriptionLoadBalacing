@@ -1,0 +1,6 @@
+{
+    "dockerComposeFile": "../../docker-compose.yaml",
+    "service": "devcontainer",
+    "workspaceFolder": "/workspaces/the-whisper-cpp",
+    "shutdownAction": "none"
+}
