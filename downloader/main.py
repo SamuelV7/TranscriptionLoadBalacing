@@ -26,12 +26,14 @@ async def main():
         print("Stream does not exist, creating it...")
         await js.add_stream(name="ToDownload", subjects=["ToDownload.sermons"])
 
-    # Publish a message to the stream
-    await nc.publish("ToDownload.sermons", b'{"url": "http://example.com"}')
-    while True:
+    # # Publish a message to the stream
+    # await nc.publish("ToDownload.sermons", b'http://example.com')
         
-    # wait for 
-    
+    # wait for message from the stream
+    while True:
+        sub = await js.subscribe("ToDownload.sermons")
+        msg = await sub.next_msg()
+        print(msg)
     
 
 if __name__ == '__main__':

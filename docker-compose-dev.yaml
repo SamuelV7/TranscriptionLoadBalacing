@@ -1,24 +1,25 @@
 version: "3.8"
 
 services:
-  whispercpp-gg:
-    build:
-      # context: whisper-ml-cpp
-      dockerfile: ./the-whisper-cpp/Dockerfile
-    volumes:
-      - ./the-whisper-cpp:/workspace:cached
-    # ports:
-    #   - 8888:8888
-    command: sleep infinity
-    networks:
-      - nats
+  # whispercpp-gg:
+  #   build:
+  #     # context: whisper-ml-cpp
+  #     dockerfile: ./the-whisper-cpp/Dockerfile
+  #   volumes:
+  #     - ./the-whisper-cpp:/workspace:cached
+  #   # ports:
+  #   #   - 8888:8888
+  #   command: sleep infinity
+  #   networks:
+  #     - nats
   
   downloader:
     build:
-      # context: whisper-ml-cpp
-      dockerfile: ./downloader/devcontainer.json
+      context: ./downloader # the amount of pain this caused me is wild xDDD loool
+      dockerfile: ./Dockerfile
     volumes:
       - ./downloader:/workspace:cached
+      - ./file_storage:/workspace/file_storage:cached
     # ports:
     #   - 8888:8888
     command: sleep infinity

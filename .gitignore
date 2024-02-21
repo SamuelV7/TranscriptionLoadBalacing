@@ -7,6 +7,7 @@ mp3
 volume
 jetstream-cluster
 downloader/poetry.lock
+file_storage
 
 # Byte-compiled / optimized / DLL files
 __pycache__/
