@@ -1,6 +1,6 @@
 {
     "dockerComposeFile": "../../docker-compose-dev.yaml",
-    "service": "whispercpp-gg",
+    "service": "downloader",
     "workspaceFolder": "/workspace/",
     "shutdownAction": "none"
 }

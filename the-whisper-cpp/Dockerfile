@@ -14,7 +14,13 @@
 FROM ghcr.io/ggerganov/whisper.cpp:main as base
 
 FROM python:latest as dev
+
 COPY --from=base /app /app
 
-WORKDIR /app
-EXPOSE 8080
+RUN pip install poetry
+RUN pip install git+https://github.com/stlukey/whispercpp.py
+
+
+# RUN poetry install
+
+# EXPOSE 8080

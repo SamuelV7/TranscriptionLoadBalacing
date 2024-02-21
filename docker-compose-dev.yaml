@@ -1,0 +1,57 @@
+version: "3.8"
+
+services:
+  whispercpp-gg:
+    build:
+      # context: whisper-ml-cpp
+      dockerfile: ./the-whisper-cpp/Dockerfile
+    volumes:
+      - ./the-whisper-cpp:/workspace:cached
+    # ports:
+    #   - 8888:8888
+    command: sleep infinity
+    networks:
+      - nats
+  
+  downloader:
+    build:
+      # context: whisper-ml-cpp
+      dockerfile: ./downloader/devcontainer.json
+    volumes:
+      - ./downloader:/workspace:cached
+    # ports:
+    #   - 8888:8888
+    command: sleep infinity
+    networks:
+      - nats
+  
+  nats:
+    image: nats
+    ports:
+      - "4222:4222"
+      - "8222:8222"
+    command: "--server_name n1m1 --js --store_dir /data --cluster_name NATS --cluster nats://0.0.0.0:6222 --http_port 8222 --routes=nats://nats:6222"
+    networks: [ "nats" ]
+  nats-1:
+    image: nats
+    command: "--server_name n1m2 --js --store_dir /data --cluster_name NATS --cluster nats://0.0.0.0:6222 --routes=nats://nats:6222"
+    networks: [ "nats" ]
+    depends_on: [ "nats" ]
+  nats-2:
+    image: nats
+    command: "--server_name n1m3 --js --store_dir /data --cluster_name NATS --cluster nats://0.0.0.0:6222 --routes=nats://nats:6222"
+    networks: [ "nats" ]
+
+  nats-gui:
+    image: sphqxe/nats-webui:latest
+    ports:
+      - "80:80"
+    networks:
+      - nats
+    # networks:
+    #   - [ "nats" ]
+
+networks:
+  nats:
+    name: nats
+

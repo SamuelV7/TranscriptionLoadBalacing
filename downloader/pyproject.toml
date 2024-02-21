@@ -1,0 +1,17 @@
+[tool.poetry]
+name = "downloader"
+version = "0.1.0"
+description = ""
+authors = ["Your Name <you@example.com>"]
+license = "AGPL3.0"
+readme = "README.md"
+
+[tool.poetry.dependencies]
+python = "^3.12"
+pytube = "^15.0.0"
+nats-py = "^2.7.0"
+
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
