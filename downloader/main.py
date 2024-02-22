@@ -18,6 +18,7 @@ async def main():
     except Exception as e:
         print("JetStream not enabled on server")
         return
+    
     # Check if the stream exists if not create it
     try:
         l = await js.stream_info("ToDownload")
@@ -25,7 +26,7 @@ async def main():
     except Exception as e:
         print("Stream does not exist, creating it...")
         await js.add_stream(name="ToDownload", subjects=["ToDownload.sermons"])
-
+    
     # # Publish a message to the stream
     # await nc.publish("ToDownload.sermons", b'http://example.com')
         

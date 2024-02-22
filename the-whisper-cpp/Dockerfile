@@ -18,7 +18,9 @@ FROM python:latest as dev
 COPY --from=base /app /app
 
 RUN pip install poetry
-RUN pip install git+https://github.com/stlukey/whispercpp.py
+RUN poetry config virtualenvs.create false
+RUN poetry install
+
 
 
 # RUN poetry install

@@ -108,7 +108,25 @@ secure = ["certifi", "cryptography (>=1.9)", "idna (>=2.0.0)", "pyopenssl (>=17.
 socks = ["pysocks (>=1.5.6,!=1.5.7,<2.0)"]
 zstd = ["zstandard (>=0.18.0)"]
 
+[[package]]
+name = "whispercpp"
+version = "0.0.17"
+description = ""
+optional = false
+python-versions = "*"
+files = [
+    {file = "whispercpp-0.0.17-cp310-cp310-macosx_10_9_x86_64.whl", hash = "sha256:70053d9e789e270931ebd1c69a2d17504f87cec29c27187bb92f16af965a9644"},
+    {file = "whispercpp-0.0.17-cp310-cp310-manylinux2014_x86_64.whl", hash = "sha256:91c2ceded37a4c0cb19e0f971126c2cd57d307a90cf2099ab5ec272033bcd12c"},
+    {file = "whispercpp-0.0.17-cp311-cp311-macosx_10_9_x86_64.whl", hash = "sha256:23c766b3d59026874f1e2de53c7003c26c020b1a515bdef6ea70fae5319e1baf"},
+    {file = "whispercpp-0.0.17-cp311-cp311-manylinux2014_x86_64.whl", hash = "sha256:2f1709e0ce7eb7cd61d9b0ae3adfde725325efced0fe08f7aa98eaf4d3d57a7f"},
+    {file = "whispercpp-0.0.17-cp38-cp38-macosx_10_9_x86_64.whl", hash = "sha256:942266c77c6400f159443d16b73785f1f03d40026d3c821d69e8111de1165d39"},
+    {file = "whispercpp-0.0.17-cp38-cp38-manylinux2014_x86_64.whl", hash = "sha256:6d244421c8124fc75e09def87b8f003b6597007fc76f9892a5ecdec5f32dbd55"},
+    {file = "whispercpp-0.0.17-cp39-cp39-macosx_10_9_x86_64.whl", hash = "sha256:280bfbc83f9e516b172f15680d5e8aa52b2b7607bf2effb1e17a6b0cf1c81f38"},
+    {file = "whispercpp-0.0.17-cp39-cp39-manylinux2014_x86_64.whl", hash = "sha256:12b8ce6d3e7ecbd80b677fa8732628030e9e42627205474876ebe768622f2c53"},
+    {file = "whispercpp-0.0.17.tar.gz", hash = "sha256:174a2c82e0ee7bcc4c21301633df86d7de49395d81d9455a9bedfb0c790813de"},
+]
+
 [metadata]
 lock-version = "2.0"
 python-versions = "^3.12"
-content-hash = "a96947841ad8b895b9f6ccc95870acefe4bbe710e68778d84e1d34f403e9e79e"
+content-hash = "58b3e75d79efa43a0ba6bcc366080fb1c6d0c9f4e58f94b970044acd10193b59"

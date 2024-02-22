@@ -2,5 +2,14 @@
     "dockerComposeFile": "../../docker-compose-dev.yaml",
     "service": "whispercpp-gg",
     "workspaceFolder": "/workspace/",
-    "shutdownAction": "none"
+    "shutdownAction": "none",
+    // add python extension
+    "customizations": {
+        "vscode": {
+            "extensions": [
+                "ms-python.python",
+                "tamasfe.even-better-toml"
+            ]
+        }
+    }
 }
